@@ -1,13 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
-<script src="script.js"></script>
+<body>
+    <div id="mainContainer">
+        <h1 id="animatedTitle">Trivia Online</h1>
+
+        <div id="app">
+            <div id="setup">
+                <h2>Configura el Juego</h2>
+                <form id="setupForm">
+                    <label>Nombre del jugador:
+                        <input type="text" id="playerName" maxlength="20" />
+                    </label>
+                    <label>Cantidad de preguntas:
+                        <input type="number" id="questionCount" />
+                    </label>
+                    <label>Nivel de dificultad:
+                        <select id="difficulty">
+                            <option value="easy">Fácil</option>
+                            <option value="medium">Medio</option>
+                            <option value="hard">Difícil</option>
+                        </select>
+                    </label>
+                    <label>Categoría:
+                        <select id="category">
+                            <option value="">Mixtas</option>
+                            <option value="9">Conocimiento General</option>
+                            <option value="11">Cine</option>
+                            <option value="12">Música</option>
+                            <option value="17">Ciencia y Naturaleza</option>
+                            <option value="23">Historia</option>
+                        </select>
+                    </label>
+                    <div class="error" id="errorMessage"></div>
+                    <button type="submit">Comenzar Juego</button>
+                </form>
+
+            </div>
+
+            <div id="game" class="hidden">
+                <div id="progress"></div>
+                <div id="question"></div>
+                <div id="options"></div>
+                <div id="timer"></div>
+                <div id="scoreboard"></div>
+            </div>
+
+            <div id="loading" class="hidden">Cargando preguntas...</div>
+
+            <div id="results" class="hidden"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
+
 </html>

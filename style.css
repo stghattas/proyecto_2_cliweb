@@ -1,0 +1,252 @@
+/* Fondo general */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #8429b9, #ffcc3e);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+/* Contenedor principal */
+#app {
+    background: #ffffffcc;
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+}
+
+#mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 20px;
+    /* espacio entre el título y el box */
+}
+
+/* Titulos */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Titulo animado */
+#animatedTitle {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem;
+    color: #fbc02d;
+    /* amarillo brillante */
+    /* Añadimos contorno negro con text-shadow */
+    text-shadow:
+        -2px -2px 0 #000,
+        2px -2px 0 #000,
+        -2px 2px 0 #000,
+        2px 2px 0 #000,
+        0 0 5px #ffd365;
+    margin-bottom: 25px;
+    animation: pulseScale 2.5s ease-in-out infinite;
+}
+
+
+@keyframes pulseScale {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+    }
+}
+
+/* Formularios */
+form label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: 500;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border 0.3s;
+}
+
+input:focus,
+select:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+/* Botones */
+button {
+    width: 100%;
+    background: #34db87;
+    color: black;
+    border: none;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background: #29b96a;
+    color: gainsboro;
+    transform: translateY(-2px);
+}
+
+/* Opciones de respuesta */
+#options button {
+    margin: 8px 0;
+    font-size: 1rem;
+}
+
+/* Barra de progreso visual */
+#progress {
+    position: relative;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 0.95em;
+    color: #2c3e50;
+    z-index: 1;
+}
+
+#progress::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 32px;
+    background: #ffffff;
+    border-radius: 4px;
+    transform: translateY(-50%);
+    z-index: 0;
+}
+
+#progress::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 8px;
+    background: #3498db;
+    border-radius: 4px;
+    transform: translateY(-50%);
+    width: calc(var(--progress, 0) * 1%);
+    transition: width 0.4s ease;
+    z-index: 0;
+}
+
+#progress span {
+    position: relative;
+    z-index: 2;
+}
+
+/* Timer */
+#timer {
+    font-size: 1.4em;
+    text-align: center;
+    margin-top: 10px;
+    transition: color 0.5s;
+}
+
+#timer.warning {
+    color: #e74c3c;
+    animation: pulse 1s infinite;
+}
+
+/* Puntuación */
+#scoreboard {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 1.1em;
+}
+
+/* Resultados */
+#results {
+    text-align: center;
+}
+
+#results button {
+    width: auto;
+    margin: 10px 5px;
+}
+
+/* Carga */
+#loading {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* Animación del timer */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: #e74c3c;
+    background: #fdecea;
+    padding: 8px;
+    margin: 10px 0;
+    border-radius: 6px;
+    display: none;
+}
+
+/* Opciones de respuesta - colores para correcto e incorrecto */
+#options button.correct {
+    background-color: #a6e6a1;
+    /* verde claro */
+    color: #2d662d;
+    border: 2px solid #2d662d;
+}
+
+#options button.incorrect {
+    background-color: #f5a1a1;
+    /* rojo claro */
+    color: #661818;
+    border: 2px solid #661818;
+}
+
+/* Para que no se puedan clickear después */
+#options button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}

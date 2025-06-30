@@ -1,8 +1,5 @@
 # 🎯 Trivia Online
 
-![License](https://img.shields.io/badge/license-MIT-green)  
-![Status](https://img.shields.io/badge/status-active-brightgreen)
-
 **Trivia Online** es un juego web interactivo de preguntas y respuestas desarrollado con **HTML, CSS y JavaScript puro**.  
 Permite a los usuarios configurar su nombre, cantidad de preguntas, dificultad y categoría, obteniendo preguntas en tiempo real desde la API de [Open Trivia DB](https://opentdb.com/).
 

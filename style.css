@@ -95,8 +95,8 @@ select:focus {
 /* Botones */
 button {
     width: 100%;
-    background: #34db87;
-    color: black;
+    background: #9e34db;
+    color: white;
     border: none;
     padding: 12px;
     margin-top: 10px;
@@ -107,8 +107,8 @@ button {
 }
 
 button:hover {
-    background: #29b96a;
-    color: gainsboro;
+    background: #f99effa5;
+    color: black;
     transform: translateY(-2px);
 }
 

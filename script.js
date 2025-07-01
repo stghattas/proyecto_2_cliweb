@@ -17,6 +17,7 @@ let correctAnswers = 0;
 let timePerQuestion = [];
 let timer;
 let timeLeft = 20;
+let savedConfig = null;
 
 const errorDiv = document.getElementById('errorMessage');
 
@@ -29,6 +30,12 @@ setupForm.addEventListener('submit', async (e) => {
   totalQuestions = parseInt(document.getElementById('questionCount').value);
   const difficulty = document.getElementById('difficulty').value;
   const category = document.getElementById('category').value;
+  savedConfig = {
+    playerName,
+    totalQuestions,
+    difficulty,
+    category
+  };
 
   if (playerName.length < 2 || playerName.length > 20) {
     showError("El nombre debe tener entre 2 y 20 caracteres.");
@@ -177,7 +184,7 @@ function showResults() {
     <p>Respuestas correctas: ${correctAnswers} de ${totalQuestions}</p>
     <p>Porcentaje de aciertos: ${percent}%</p>
     <p>Tiempo promedio por pregunta: ${avgTime}s</p>
-    <button onclick="startGame()">Reiniciar con la misma configuración</button>
+    <button onclick="restartWithSameConfig()">Reiniciar con la misma configuración</button>
     <button onclick="resetGame()">Cambiar configuración</button>
     <button onclick="window.location.reload()">Finalizar</button>
   `;
@@ -192,4 +199,36 @@ function decodeHTMLEntities(str) {
   var txt = document.createElement("textarea");
   txt.innerHTML = str;
   return txt.value;
+}
+
+async function restartWithSameConfig() {
+  if (!savedConfig) return;
+
+  playerName = savedConfig.playerName;
+  totalQuestions = savedConfig.totalQuestions;
+  const difficulty = savedConfig.difficulty;
+  const category = savedConfig.category;
+
+  errorDiv.style.display = 'none';
+  errorDiv.textContent = '';
+
+  loadingDiv.classList.remove('hidden');
+  setupForm.parentElement.classList.add('hidden');
+
+  try {
+    const url = `https://opentdb.com/api.php?amount=${totalQuestions}`
+      + (category ? `&category=${category}` : "")
+      + `&difficulty=${difficulty}&type=multiple`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.response_code !== 0) throw new Error("Sin preguntas válidas.");
+    questions = data.results;
+    startGame();
+  } catch (err) {
+    showError("Error al cargar preguntas: " + err.message);
+    setupForm.parentElement.classList.remove('hidden');
+  } finally {
+    loadingDiv.classList.add('hidden');
+  }
 }
